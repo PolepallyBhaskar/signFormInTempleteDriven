@@ -1,0 +1,97 @@
+<div class="container  "  style="padding-top: 50px ;">
+  <form #signUpForm ="ngForm" (ngSubmit)="save(signUpForm)">
+    <div class="form-group">
+    <table >
+      <tr>
+            <td><label for ="firstName">FIRST NAME<span style="color: red;">*</span></label></td>
+            <td><input type="text" class="form-control" id ="firstName" name="firstName" #firstName="ngModel" ngModel required>
+              <span class="help-bpx" *ngIf="firstName.touched && !firstName.valid ">Please enter the first name</span>
+            </td>&nbsp;
+
+            <td><label for="lastName">LAST NAME<span style="color: red;">*</span></label></td>
+            <td><input type="text" class="form-control" id ="lastName" name="lastName" #lastName="ngModel" ngModel required>
+              <span class="help-bpx" *ngIf="lastName.touched && !lastName.valid ">Please enter the last name</span>
+            </td>
+
+
+       </tr>
+        <tr>
+
+
+              <td><label for="email">E-MAIL<span style="color: red;">*</span></label></td>
+              <td><input type="email" class="form-control" id ="email" name="email" #email="ngModel" email ngModel required>
+                <span class="help-bpx" *ngIf="email.touched && !email.valid ">Please enter valid  Email </span>
+
+              </td>
+
+
+
+        </tr>
+        <tr>
+
+
+              <td><label for="password">PASSWORD<span style="color: red;">*</span></label></td>
+              <td><input type="password" class="form-control"  id ="password" name="password" #password="ngModel" ngModel required>
+                <span class="help-bpx" *ngIf="password.touched && !password.valid ">Please enter the password</span>
+                <span  class="help-bpx" *ngIf="password.touched && password.valid && password.value <= 7  ">password should be atleast 8 charecters</span>
+              </td>&nbsp;
+
+
+
+
+              <td><label for ="confirmPassword ">CONFIRM PASSWORD<span style="color: red;">*</span></label></td>
+              <td><input type="password" class="form-control" id ="confirmPassword" name="confirmPassword" #confirmPassword="ngModel" ngModel required>
+                <span  *ngIf="confirmPassword.touched && !confirmPassword.valid ">Please re enter the password </span>
+                <span  *ngIf=" confirmPassword.touched && confirmPassword.valid && password.value != confirmPassword.value ">password doesn't match re-enter</span>
+
+
+              </td>
+
+
+        </tr>
+        <tr>
+
+
+
+                <td><label for="userType">USER TYPE<span style="color: red;">*</span></label></td>
+              <td><input type="radio"  id ="bussiness" name="userType" value="bussiness" #userType="ngModel" ngModel required >BUSSINESS
+              &nbsp;<input type="radio" id ="individual" name="userType" value="individual" #userType="ngModel" ngModel required >INDIVIDUAL
+              &nbsp;<br> <input type="radio" id ="other" name="userType" value="other" #userType="ngModel" ngModel required >OTHER</td>
+              <span class="help-bpx" *ngIf="userType.touched && !userType.valid ">Please select the USERTYPE</span>
+              <div *ngIf="userType.value == 'other'">
+                <br>
+                <input type="text" name="userType" value="other" #userType="ngModel" placeholder="Enter User Type" ngModel required>
+              </div>
+
+
+
+
+
+        </tr>
+        <tr>
+
+
+              <td><label>PHONE<span style="color: red;">*</span></label></td>
+              <td><input type="tel" class="form-control" id ="phone"></td>
+              <td>
+              <select name="type">
+                <option  disabled selected>Type</option>
+                <option value="landline">Landline</option>
+                <option value="fax">Mobile</option>
+                <option value="fax">Fax</option>
+              </select>
+            </td>
+
+
+        </tr>
+    </table>
+  </div>
+
+  <div class="invalid-feedback" *ngIf="isSubmitted && signUpForm.invalid">
+    <p>Please enter valid details</p>
+  </div>
+  <div class="align-center">
+    <button type="submit" class="btn btn-default" id="register"  >Register</button>
+</div>
+  </form>
+</div>
