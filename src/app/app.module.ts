@@ -4,11 +4,15 @@ import {FormsModule} from '@angular/forms';
 
 import { AppComponent } from './app.component';
 import { SignUpFormComponent } from './sign-up-form/sign-up-form.component';
+import { FormdisplayComponent } from './formdisplay/formdisplay.component';
+import { AddressFormComponent } from './address-form/address-form.component';
 
 @NgModule({
   declarations: [
     AppComponent,
-    SignUpFormComponent
+    SignUpFormComponent,
+    FormdisplayComponent,
+    AddressFormComponent
   ],
   imports: [
     BrowserModule,

@@ -1,97 +1,206 @@
 <div class="container  "  style="padding-top: 50px ;">
   <form #signUpForm ="ngForm" (ngSubmit)="save(signUpForm)">
-    <div class="form-group">
+
+
+
+    <div class="form-group ">
     <table >
-      <tr>
-            <td><label for ="firstName">FIRST NAME<span style="color: red;">*</span></label></td>
+
+      <div>
+      <tr><td><label for ="firstName">FIRST NAME :<span style="color: red;">*</span></label></td>
             <td><input type="text" class="form-control" id ="firstName" name="firstName" #firstName="ngModel" ngModel required>
-              <span class="help-bpx" *ngIf="firstName.touched && !firstName.valid ">Please enter the first name</span>
-            </td>&nbsp;
+            <span class="text-danger" *ngIf="firstName.touched && !firstName.valid ">Please enter the first name</span></td>
 
-            <td><label for="lastName">LAST NAME<span style="color: red;">*</span></label></td>
+            <td><label for="lastName">LAST NAME :<span style="color: red;">*</span></label></td>
             <td><input type="text" class="form-control" id ="lastName" name="lastName" #lastName="ngModel" ngModel required>
-              <span class="help-bpx" *ngIf="lastName.touched && !lastName.valid ">Please enter the last name</span>
-            </td>
-
-
-       </tr>
-        <tr>
-
-
-              <td><label for="email">E-MAIL<span style="color: red;">*</span></label></td>
+              <span class="text-danger" *ngIf="lastName.touched && !lastName.valid ">Please enter the last name</span>
+            </td></tr>
+        <tr> <td><label for="email">E-MAIL :<span style="color: red;">*</span></label></td>
               <td><input type="email" class="form-control" id ="email" name="email" #email="ngModel" email ngModel required>
-                <span class="help-bpx" *ngIf="email.touched && !email.valid ">Please enter valid  Email </span>
+                <span class="text-danger" *ngIf="email.touched && !email.valid ">Please enter valid  Email </span></td> </tr>
+        <tr>  <td><label for="password">PASSWORD :<span style="color: red;">*</span></label></td>
 
-              </td>
+              <td><input type="password" class="form-control" data-toggle="password" id ="password" name="password" #password="ngModel" ngModel required>
+              <span class="text-danger" *ngIf="password.touched && !password.valid && password.value.length == 0">Please enter the password</span>
+              <span  class="text-danger" *ngIf="password.touched && password.valid && password.value.length <=8">password should be atleast 8 charecters</span></td>
 
-
-
-        </tr>
-        <tr>
-
-
-              <td><label for="password">PASSWORD<span style="color: red;">*</span></label></td>
-              <td><input type="password" class="form-control"  id ="password" name="password" #password="ngModel" ngModel required>
-                <span class="help-bpx" *ngIf="password.touched && !password.valid ">Please enter the password</span>
-                <span  class="help-bpx" *ngIf="password.touched && password.valid && password.value <= 7  ">password should be atleast 8 charecters</span>
-              </td>&nbsp;
-
-
-
-
-              <td><label for ="confirmPassword ">CONFIRM PASSWORD<span style="color: red;">*</span></label></td>
+              <td><label for ="confirmPassword ">CONFIRM PASSWORD :<span style="color: red;">*</span></label></td>
               <td><input type="password" class="form-control" id ="confirmPassword" name="confirmPassword" #confirmPassword="ngModel" ngModel required>
-                <span  *ngIf="confirmPassword.touched && !confirmPassword.valid ">Please re enter the password </span>
-                <span  *ngIf=" confirmPassword.touched && confirmPassword.valid && password.value != confirmPassword.value ">password doesn't match re-enter</span>
-
-
-              </td>
-
-
-        </tr>
+              <span class="text-danger"  *ngIf="confirmPassword.touched && !confirmPassword.valid ">Please confirm the password </span>
+              <span class="text-danger" *ngIf=" confirmPassword.touched && confirmPassword.valid && password.value != confirmPassword.value ">password doesn't match ,re-enter</span></td>        </tr>
         <tr>
-
-
-
-                <td><label for="userType">USER TYPE<span style="color: red;">*</span></label></td>
-              <td><input type="radio"  id ="bussiness" name="userType" value="bussiness" #userType="ngModel" ngModel required >BUSSINESS
+             <td><label for="userType">USER TYPE :<span style="color: red;">*</span></label></td>
+              <div>
+              <td><input type="radio"  id ="business" name="userType" value="business" #userType="ngModel" ngModel required >BUSINESS
               &nbsp;<input type="radio" id ="individual" name="userType" value="individual" #userType="ngModel" ngModel required >INDIVIDUAL
-              &nbsp;<br> <input type="radio" id ="other" name="userType" value="other" #userType="ngModel" ngModel required >OTHER</td>
-              <span class="help-bpx" *ngIf="userType.touched && !userType.valid ">Please select the USERTYPE</span>
+              &nbsp;<br> <input type="radio" id ="other" name="userType" value="other" #userType="ngModel" ngModel required >OTHER
+              <br><span class="text-danger" *ngIf="userType.touched && !userType.valid ">Please select the USERTYPE</span>
               <div *ngIf="userType.value == 'other'">
-                <br>
                 <input type="text" name="userType" value="other" #userType="ngModel" placeholder="Enter User Type" ngModel required>
+                <br><span class="text-danger" *ngIf="userType.touched && !userType.valid ">Please Enter  USERTYPE</span>
               </div>
-
-
-
-
-
+            </td>
+              </div>
         </tr>
+      </div>
         <tr>
 
 
-              <td><label>PHONE<span style="color: red;">*</span></label></td>
-              <td><input type="tel" class="form-control" id ="phone"></td>
-              <td>
-              <select name="type">
-                <option  disabled selected>Type</option>
-                <option value="landline">Landline</option>
-                <option value="fax">Mobile</option>
-                <option value="fax">Fax</option>
-              </select>
-            </td>
+            <div *ngFor ="let phoneId of phoneNumberIds; let i =index;">
+              <td><div *ngIf ="i<1"><label>PHONE :<span style="color: red;">*</span></label></div></td>
 
+              <td ><input type="tel" class="form-control" name ="phoneNumber{{phoneId}}" maxlength="10" #phoneNumber="ngModel" ngModel>
+                <span class="text-danger" *ngIf="phoneNumber.touched && !phoneNumber.valid "><br>Please Enter Phone Number</span>
+                <span  class="text-danger" *ngIf="phoneNumber.touched && phoneNumber.valid && phoneNumber.value.length != 10"> <br>Please Enter  valid Phone Number</span></td>
+                  <td><select name="type[{{phoneId}}]"   ngModel  #type[{{phoneId}}]>
+                  <option value="" disabled selected>--Type--</option>
+                  <option value="landline">Landline</option>
+                  <option value="mobile">Mobile</option>
+                  <option value="fax">Fax</option>
+                </select>
+
+               <td>
+                 <div> <button type="button" (click)="add()">+</button></div></td>
+                 <td><div *ngIf ="i>0"><button type="button" (click)=remove(i);>-</button></div></td>
+            </div>
 
         </tr>
+        <tr>
+          <td><h3> Shipping ADDRESS</h3></td>
+          </tr>
+
+        <app-address-form [(addressObj)]="shippingAddress"  [resetAddressForm] ="addressFormReset" > </app-address-form>
+        <div>
+          <tr>
+            <td >
+              <div><input type="checkbox"  name="sameAddress" id ="sameAddress" class="largerCheckbox"  (click)=sameAddress1()  ngModel>
+              &nbsp;<label for="sameAddress" style="font-size: 18px;" > Billing address same as shipping address</label></div></td>
+
+            </tr>
+      </div>
+      <tr>
+        <td><h3> Billing ADDRESS</h3></td>
+      </tr>
+          <app-address-form [(addressObj)]="billingAddress" [update] ="sameAddressChecked" [resetAddressForm] ="addressFormReset"></app-address-form>
+
+
+<!--With using resuable Component-->
+<!--
+    <div class="form-group " >
+
+
+            <div>
+              <tr>
+                <td><h3>SHIPPING ADDRESS</h3></td>
+                </tr>
+               <tr>
+              <td><label>LINE 1 :</label></td>
+              <td><input type="text" class="form-control" id ="shippingLine1" name="shippingLine1" #shippingLine1="ngModel"  style="width: 300px;" ngModel required></td>
+            </tr>
+            <tr>
+              <td> <label>LINE 2 :</label></td>
+              <td><input type="text" class="form-control" id ="shippingLine2" name="shippingLine2" #shippingLine2="ngModel"  ngModel required></td>
+            </tr>
+            <tr>
+              <td><label>CITY :</label></td>
+              <td><input type="text "class="form-control" id ="shippingCity" name="shippingCity" #shippingCity="ngModel"  ngModel required></td>
+              <td><label>STATE :</label></td>
+              <td><input type="text " class="form-control" id ="shippingState" name="shippingState" #shippingState="ngModel" ngModel required></td>
+            </tr>
+            <tr>
+              <td><label>COUNTRY :</label></td>
+              <td><input type="text " class="form-control" id ="shippingCountry" name="shippingCountry" #shippingCountry="ngModel" ngModel required></td>
+              <td><label>ZIP :</label></td>
+              <td><input type="text " class="form-control" id ="shippingZip" name="shippingZip" #shippingZip="ngModel" ngModel required></td>
+            </tr>
+          </div>
+      <div>
+          <tr>
+            <td >
+              <div><input type="checkbox"  name="sameAddress" id ="sameAddress" class="largerCheckbox"  (change)= "sameAddressfor(addressForm)" ngModel>
+              &nbsp;<label for="sameAddress" style="font-size: 18px;" > Billing address same as shipping address</label></div></td>
+
+            </tr>
+      </div>
+       <div  >
+            <tr>
+              <td><h3>BILLING ADDRESS</h3></td>
+              </tr>
+
+         <tr>
+          <td><label>LINE 1 :</label></td>
+
+          <td><input type="text" class="form-control" id ="billingLine1" name="billingLine1"  [(ngModel)]="billingAddressModel.billingLine1" #billingLine1="ngModel" style="width: 300px;"  ngModel required></td>
+        </tr>
+        <tr>
+          <td> <label>LINE 2 :</label></td>
+          <td><input type="text" class="form-control" id ="billingLine2" name="billingLine2" [(ngModel)]=" billingAddressModel.billingLine2"#billingLine2="ngModel" ngModel required></td>
+        </tr>
+        <tr>
+          <td><label>CITY :</label></td>
+          <td><input type="text "class="form-control" id ="billingCity" name="billingCity"  [(ngModel)]=" billingAddressModel.billingCity"#billingCity="ngModel" ngModel required></td>
+          <td><label>STATE :</label></td>
+          <td><input type="text " class="form-control" id ="billingState" name="billingState"[(ngModel)]=" billingAddressModel.billingState" #billingState="ngModel" ngModel required></td>
+        </tr>
+        <tr>
+          <td><label>COUNTRY :</label></td>
+          <td><input type="text " class="form-control" id ="billingCountry" name="billingCountry" [(ngModel)]=" billingAddressModel.billingCountry"#billingCountry="ngModel" ngModel required></td>
+          <td><label>ZIP :</label></td>
+          <td><input type="text " class="form-control" id ="billingZip" name="billingZip" [(ngModel)]=" billingAddressModel.billingZip" #billingZip="ngModel" ngModel required></td>
+        </tr>
+      </div>
+    </div>
+    -->
+  <div>
+
+    <tr>
+      <td><label>RECEIVE UPDATES:</label></td>&nbsp;&nbsp;
+      <td><div *ngFor="let item of updates">
+        <input class="form-check-input" ngModel  class="largerCheckbox"name="{{item}}" type="checkbox" #{{item}} ="ngModel" id="{{item}}">
+        <label class="form-check-label" for="{{item}}">{{item}}</label>
+        </div></td>
+
+    </tr>
+   <!-- <tr>
+      <td><label>RECEIVE UPDATES:</label></td>&nbsp;&nbsp;
+      <td><input type="checkbox" name="sms" class="largerCheckbox" ngModel #rsms="ngModel">
+        <label for="sms"  > SMS </label>&nbsp;
+      <input type="checkbox" name="Email" class="largerCheckbox" ngModel #remail="ngModel">
+        <label for="Email"  > EMAIL</label>&nbsp;
+      <input type="checkbox" name="whatsapp" class="largerCheckbox" ngModel #rwhatsapp="ngModel">
+        <label for="whatsapp" > WHATSAPP </label></td>
+
+    </tr>-->
+  </div>
+
+        <tr>
+    <div class="text-danger" *ngIf="isSubmitted && signUpForm.untouched && !signUpForm.invalid ">
+      <p>Please enter valid details</p>
+    </div>
+    </tr>
+    <tr>
+      <td align="center">
+      <button type="submit" id="submit" >SUBMIT</button>
+
+      <button type="button" id="reset" (click) ="reset(signUpForm)" >RESET</button>
+
+
+  </td>
+</tr>
+
+
     </table>
   </div>
 
-  <div class="invalid-feedback" *ngIf="isSubmitted && signUpForm.invalid">
-    <p>Please enter valid details</p>
+
+    </form>
+    <h2>shipping</h2>
+    {{shippingAddress| json}}
+    <h2>billing</h2>
+    {{billingAddress| json}}
+
+
   </div>
-  <div class="align-center">
-    <button type="submit" class="btn btn-default" id="register"  >Register</button>
-</div>
-  </form>
-</div>
+
+
+

@@ -1,0 +1,68 @@
+
+<form #addressForm ="ngForm" >
+  <div  class="form-group " >
+    <table>
+
+          <div>
+             <tr>
+            <td><label>LINE 1 :</label></td>
+            <td><input type="text" class="form-control" id ="line1" name="line1" #line1="ngModel"  style="width: 300px;" [(ngModel)]=" addressObj.line1" [disabled]="update" ngModel required  ></td>
+          </tr>
+          <tr>
+            <td> <label>LINE 2 :</label></td>
+            <td><input type="text" class="form-control" id ="line2" name="line2" #line2="ngModel"   ngModel [(ngModel)]=" addressObj.line2"  [disabled]="update" required></td>
+          </tr>
+          <tr>
+            <td><label>CITY :</label></td>
+            <td><input type="text "class="form-control" id ="city" name="city" #city="ngModel"  [(ngModel)]= "addressObj.city" [disabled]="update" ngModel required ></td>
+            <td><label>STATE :</label></td>
+            <td><input type="text " class="form-control" id ="state" name="state" #state="ngModel" [(ngModel)]="addressObj.state" [disabled]="update" ngModel  required></td>
+          </tr>
+          <tr>
+            <td><label>COUNTRY :</label></td>
+            <td><input type="text " class="form-control" id ="country" name="country" #country="ngModel" [(ngModel)]=" addressObj.country" [disabled]="update" ngModel required></td>
+            <td><label>ZIP :</label></td>
+            <td><input type="text " class="form-control" id ="zip" name="zip" #zip="ngModel" [(ngModel)] ="addressObj.zip" [disabled]="update"  required></td>
+          </tr>
+        </div>
+
+
+
+
+      </table>
+
+    </div>
+
+  </form>
+
+    <!--
+     <div  >
+          <tr>
+            <td><h3>BILLING ADDRESS</h3></td>
+            </tr>
+
+       <tr>
+        <td><label>LINE 1 :</label></td>
+
+        <td><input type="text" class="form-control" id ="billingLine1" name="billingLine1"  [(ngModel)]="model1.billingLine1" #billingLine1="ngModel" style="width: 300px;"  ngModel required></td>
+      </tr>
+      <tr>
+        <td> <label>LINE 2 :</label></td>
+        <td><input type="text" class="form-control" id ="billingLine2" name="billingLine2" [(ngModel)]=" model1.billingLine2"#billingLine2="ngModel" ngModel required></td>
+      </tr>
+      <tr>
+        <td><label>CITY :</label></td>
+        <td><input type="text "class="form-control" id ="billingCity" name="billingCity"  [(ngModel)]=" model1.billingCity"#billingCity="ngModel" ngModel required></td>
+        <td><label>STATE :</label></td>
+        <td><input type="text " class="form-control" id ="billingState" name="billingState"[(ngModel)]=" model1.billingState" #billingState="ngModel" ngModel required></td>
+      </tr>
+      <tr>
+        <td><label>COUNTRY :</label></td>
+        <td><input type="text " class="form-control" id ="billingCountry" name="billingCountry" [(ngModel)]=" model1.billingCountry"#billingCountry="ngModel" ngModel required></td>
+        <td><label>ZIP :</label></td>
+        <td><input type="text " class="form-control" id ="billingZip" name="billingZip" [(ngModel)]=" model1.billingZip" #billingZip="ngModel" ngModel required></td>
+      </tr>
+    </div>
+-->
+
+
